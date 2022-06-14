@@ -25,6 +25,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path("api/", include("oscarapi.urls")),
+    path("n/dashboard/", include(apps.get_app_config('dashboard_refresh').urls[0])),
     path('', include(apps.get_app_config('oscar').urls[0])),
 
 ]
