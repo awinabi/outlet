@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-gb" }}" class="{% block html_class %}no-js{% endblock %}">
     <head>
@@ -21,23 +20,15 @@
         {# Additional CSS - specific to certain pages #}
         {% block extrastyles %}{% endblock %}
 
-        {% block extrahead %}
-            {{ block.super }}
-
-            <meta name="robots" content="NONE,NOARCHIVE">
-        {% endblock %}
+        {% block extrahead %}{% endblock %}
 
         {% block tracking %}
-            {# By default there is no analytics tracking in the dashboard #}
+            {# Default to using Google analytics #}
+            {% include "oscar/partials/google_analytics.html" %}
         {% endblock %}
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" href="{% static 'oscar-refresh/css/dashboard.css' %}">
     </head>
 
-    <body id="{% block body_id %}default{% endblock %}"  class="tw-bg-gray-100 {% block body_class %}default{% endblock %}">
+    <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
         {# Main content goes in this 'layout' block #}
         {% block layout %}{% endblock %}
 

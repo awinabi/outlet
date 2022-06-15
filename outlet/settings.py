@@ -54,17 +54,17 @@ INSTALLED_APPS = [
     
     'apps.dashboard_refresh.apps.DashboardRefreshConfig',
     'apps.dashboard_refresh.catalogue.apps.CatalogueDashboardConfig',
-    'apps.dashboard_refresh.communications.apps.CommunicationsDashboardConfig',
-    'apps.dashboard_refresh.offers.apps.OffersDashboardConfig',
-    'apps.dashboard_refresh.orders.apps.OrdersDashboardConfig',
-    'apps.dashboard_refresh.pages.apps.PagesDashboardConfig',
-    'apps.dashboard_refresh.partners.apps.PartnersDashboardConfig',
-    'apps.dashboard_refresh.ranges.apps.RangesDashboardConfig',
-    'apps.dashboard_refresh.reports.apps.ReportsDashboardConfig',
-    'apps.dashboard_refresh.reviews.apps.ReviewsDashboardConfig',
-    'apps.dashboard_refresh.shipping.apps.ShippingDashboardConfig',
-    'apps.dashboard_refresh.users.apps.UsersDashboardConfig',
-    'apps.dashboard_refresh.vouchers.apps.VouchersDashboardConfig',
+    # 'apps.dashboard_refresh.communications.apps.CommunicationsDashboardConfig',
+    # 'apps.dashboard_refresh.offers.apps.OffersDashboardConfig',
+    # 'apps.dashboard_refresh.orders.apps.OrdersDashboardConfig',
+    # 'apps.dashboard_refresh.pages.apps.PagesDashboardConfig',
+    # 'apps.dashboard_refresh.partners.apps.PartnersDashboardConfig',
+    # 'apps.dashboard_refresh.ranges.apps.RangesDashboardConfig',
+    # 'apps.dashboard_refresh.reports.apps.ReportsDashboardConfig',
+    # 'apps.dashboard_refresh.reviews.apps.ReviewsDashboardConfig',
+    # 'apps.dashboard_refresh.shipping.apps.ShippingDashboardConfig',
+    # 'apps.dashboard_refresh.users.apps.UsersDashboardConfig',
+    # 'apps.dashboard_refresh.vouchers.apps.VouchersDashboardConfig',
 
     'oscar.apps.dashboard.apps.DashboardConfig',
     'oscar.apps.dashboard.reports.apps.ReportsDashboardConfig',
@@ -193,6 +193,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+OSCAR_SHOP_NAME = 'CartSigma'
 OSCAR_INITIAL_ORDER_STATUS = 'Pending'
 OSCAR_INITIAL_LINE_STATUS = 'Pending'
 OSCAR_ORDER_STATUS_PIPELINE = {

@@ -6,8 +6,7 @@
 {% load static %}
 
 {% block styles %}
-    {# <link rel="stylesheet" type="text/css" href="{% static "oscar/css/dashboard.css" %}" /> #}
-    <link rel="stylesheet" type="text/css" href="{% static "oscar-refresh/css/dashboard.css" %}" />
+    <link rel="stylesheet" type="text/css" href="{% static "oscar/css/dashboard.css" %}" />
 {% endblock %}
 
 {% block extrastyles %}
@@ -23,56 +22,47 @@
 
 {% block layout %}
     {% block navbar %}
-        <header class="navbar navbar-light py-0 sticky-top bg-white shadow-sm justify-content-start align-items-center flex-md-nowrap">
+        <header class="navbar navbar-light py-0 sticky-top bg-white border-bottom justify-content-start flex-md-nowrap">
 
-          <div class='col-md-3 col-lg-2 py-2 px-3 d-flex justify-content-between align-items-center'>
-            <button class="navbar-toggler px-2 border-0 d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
+          <div class='col-md-3 col-lg-2 py-3 px-3 tw-bg-gray-300'><a class="navbar-brand fw-bold  tw-text-gray-700 text-uppercase ms-5 ms-md-0  me-0 fs-6" href="{{ homepage_url }}">
+              {{ shop_name }} Dashboard
+          </a></div>
 
-            <a class="navbar-brand fw-bold tw-text-gray-800 text-uppercase text-center fs-6" href="{{ homepage_url }}">
-              {{ shop_name }}
-            </a>
-
-          </div>
-
-          <div class="col-md-9 col-lg-10 ps-md-3 pe-md-4 py-2 px-3 tw-bg-gray-50 d-flex flex-grow-1 justify-content-between align-items-center">
-
-          <form class="me-3 px-2 d-flex flex-grow-1" role="search">
-            <input type="search" class="navbar-search rounded-1 shadow-sm border-0 form-control " placeholder="Search..." aria-label="Search">
+          <form class="w-50 me-3 px-2" role="search">
+            <input type="search" class="form-control " placeholder="Search..." aria-label="Search">
           </form>
 
-          
-          <div class="d-flex justify-content-end align-items-center">
+          <button class="navbar-toggler position-absolute border-0 d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="d-flex w-100 justify-content-end">
 
-            <div class="flex-shrink-0 dropdown">
+            <div class="flex-shrink-0 dropdown px-3">
               <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://avatars.dicebear.com/api/micah/default.svg" alt="mdo" class="tw-bg-indigo-100 border-2 rounded-circle" width="32" height="32">
+                <img src="https://avatars.dicebear.com/api/adventurer/storyboyz.svg" alt="mdo" class="rounded-circle" width="48" height="48">
               </a>
 
-              <ul class="dropdown-menu dropdown-menu-end tw-bg-gray-50 me-2 py-0 text-small border-0 shadow-sm rounded-1" aria-labelledby="dropdownUser2">
-                <li><a class="dropdown-item py-2 " href="{% url 'customer:summary' %}"><i class='sidebar-icon fa-solid fa-gears me-2'></i> Settings</a></li>
-                <li><a class="dropdown-item py-2 tw-bg-gray-100" href="{% url 'customer:summary' %}"><i class='sidebar-icon fa-solid fa-user me-2'></i> Account</a></li>
-                <li><a class="dropdown-item py-2" href="{% url 'dashboard:logout' %}"><i class='sidebar-icon fa-solid fa-arrow-right-from-bracket me-2'></i> Logout</a></li>
+              <ul class="dropdown-menu dropdown-menu-end tw-bg-gray-100 me-2 py-0 text-small shadow-sm rounded-2" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item py-2 " href="{% url 'customer:summary' %}"><i class='fa-solid fa-gears me-2'></i> Settings</a></li>
+                <li><a class="dropdown-item py-2 tw-bg-gray-200" href="{% url 'customer:summary' %}"><i class='fa-solid fa-user me-2'></i> Account</a></li>
+                <li><a class="dropdown-item py-2" href="{% url 'dashboard:logout' %}"><i class='fa-solid fa-arrow-right-from-bracket me-2'></i> Logout</a></li>
               </ul>
             </div>
-          </div>
           </div>
 
         </header>
     {% endblock navbar %}
 
-    <div class="row gx-0">
     {% block dashboard_nav %}
       {% dashboard_navigation user as nav_items %}
-    <nav id="sidebarMenu" class="col-md-3 tw-bg-slate-50 pb-3 col-lg-2 d-md-block sidebar collapse">
+    <nav id="sidebarMenu" class="col-md-3 tw-bg-gray-200 col-lg-2 d-md-block sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           {% for item in nav_items %}
           <li class="nav-item {% if item.has_children %}dropdown{% endif %}">
-            <a class="nav-link d-flex justify-content-between align-items-center" href="{% if item.is_heading %}#{% else %}{{ item.url }}{% endif %}">
+            <a class="nav-link d-flex justify-content-between align-items-center" href="#">
               <span>
-                <i class="sidebar-icon tw-text-indigo-800 fa-solid {% if item.icon %}{{ item.icon }}{% endif %}"></i>
+                <i class="sidebar-icon tw-text-indigo-600 fa-solid {% if item.icon %}{{ item.icon }}{% endif %}"></i>
                 <span class='ms-2'>{{ item.label }}</span>
               </span>
 
@@ -80,26 +70,71 @@
               <i class=' fa-solid fa-chevron-down'></i>
               {% endif %}
             </a>
-
+            
             {% if item.has_children %}
             <ul class="submenu collapse">
               {% for subitem in item.children %}
-              <li><a class="nav-link ps-5 text-capitalize" href="{{ subitem.url }}">{{ subitem.label}}</a></li>
+              <li><a class="nav-link ps-5" href="#">{{ subitem.label }}</a></li>
               {% endfor %}
             </ul>
             {% endif %}
           </li>
-          {% endfor %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="sidebar-icon tw-text-indigo-600 fa-solid fa-box"></i>
+              <span class='ms-2'>Catalog</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link d-flex justify-content-between align-items-center" href="#">
+              <span>
+                <i class="sidebar-icon tw-text-indigo-600 fa-solid fa-box"></i>
+                <span class='ms-2'>Services</span>
+              </span>
+
+              <i class=' fa-solid fa-chevron-down'></i>
+            </a>
+            <ul class="submenu collapse">
+              <li><a class="nav-link ps-5" href="#">Submenu item 1 </a></li>
+              <li><a class="nav-link ps-5" href="#">Submenu item 2 </a></li>
+              <li><a class="nav-link ps-5" href="#">Submenu item 3 </a> </li>
+            </ul>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="sidebar-icon tw-text-orange-600 fa-solid fa-cart-shopping"></i>
+              <span class='ms-2'>Orders</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="sidebar-icon tw-text-gray-600 fa-solid fa-user-group"></i>
+              <span class='ms-2'>Customers</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="sidebar-icon tw-text-yellow-600 fa-solid fa-tag"></i>
+              <span class='ms-2'>Discounts</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="sidebar-icon tw-text-blue-600 fa-solid fa-pen-clip"></i>
+              <span class='ms-2'>Content</span>
+            </a>
+          </li>
         </ul>
 
-        <div class='tw-bg-slate-50 mt-3'>
+        <div class='tw-bg-gray-200 mt-3'>
             <div class='pt-3 mb-2 px-3'>
                 <span class='h6 tw-text-gray-600 small text-uppercase'>Settings</span>
             </div>
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-screwdriver-wrench"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-screwdriver-wrench"></i>
                   <span class='ms-2'>Product</span>
                 </a>
               </li>
@@ -112,61 +147,59 @@
 
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-ellipsis"></i>
+                  <i class="sidebar-icon tw-text-blue-800 fa-solid fa-ellipsis"></i>
                   <span class='ms-2'>More</span>
                 </a>
               </li>
             </ul>
         </div>
 
-        <div class='tw-bg-slate-50 mt-3 mb-2'>
+        <div class='tw-bg-gray-200 mt-3 mb-2'>
             <div class='pt-3 mb-2 px-3'>
                 <span class='h6 tw-text-gray-600 small text-uppercase'>Reports</span>
             </div>
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#">
-                  <i class="sidebar-icon tw-text-indigo-600 fa-solid fa-file"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-file"></i>
                   <span class='ms-2'>Orders</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-file"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-file"></i>
                   <span class='ms-2'>Product Analytics</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-file"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-file"></i>
                   <span class='ms-2'>User Analytics</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-file"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-file"></i>
                   <span class='ms-2'>Shopping Carts</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-file"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-file"></i>
                   <span class='ms-2'>Coupons</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
-                  <i class="sidebar-icon tw-text-indigo-800 fa-solid fa-file"></i>
+                  <i class="sidebar-icon tw-text-blue-600 fa-solid fa-file"></i>
                   <span class='ms-2'>Offers</span>
                 </a>
               </li>
             </ul>
         </div>
-        <div class='tw-bg-indigo-50 my-2'>
-          <div class='py-3 mb-2 px-3'>
-                <span class='h6 tw-text-gray-600 text-muted small'>
-                  <strong>Oscar Refresh</strong> <br />
-                  <span>Version v1.0 </span></span>
+        <div class='tw-bg-gray-200 mt-2 mb-2'>
+          <div class='pt-3 mb-2 px-3'>
+                <span class='h6 tw-text-gray-600 small'>v1.0</span>
             </div>
         </div>
 
@@ -174,8 +207,8 @@
       </div>
     </nav>
     {% endblock %}
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
 
+    <div class="container-fluid">
         {% block breadcrumbs %}
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -188,23 +221,19 @@
 
         <div class="content">
             {% include 'oscar/dashboard_refresh/partials/alert_messages.html' %}
-
             {% block header %}
-            <div class="page-header py-3">
-                <h1 class='mb-0'>{% block headertext %}{% endblock %}</h1>
+            <div class="page-header">
+                <h1>{% block headertext %}{% endblock %}</h1>
             </div>
             {% endblock %}
-
             <div class="page-content">
                 {% block content %}
-                    {% block dashboard_content %}
-                    {% endblock dashboard_content %}
+                    {% block dashboard_content %}{% endblock dashboard_content %}
                 {% endblock content %}
             </div>
         </div>
+    </div><!-- /container -->
 
-    </main>
-  </div>
 {% endblock %}
 
 {# Local scripts #}

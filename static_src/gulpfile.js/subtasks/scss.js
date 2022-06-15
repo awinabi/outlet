@@ -10,7 +10,7 @@ module.exports = function(cb) {
             sourcemaps.init(),
             sass({
                 includePaths: [
-                    'oscar/scss/',
+                    'oscar-refresh/scss/',
                 ],
                 outputStyle: null,
             }),
